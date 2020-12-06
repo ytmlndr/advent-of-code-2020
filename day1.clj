@@ -7,9 +7,21 @@
           :when (= 2020 (+ x y))]
       [x y])))
 
-(defn solve [input]
+(defn- get-triplet [input]
+  (first 
+    (for [x input
+          y input
+          z input
+          :when (= 2020 (+ x y z))]
+      [x y z])))
+
+(defn- solve [input tuple-fn]
   (->> input
-       get-pair
+       tuple-fn
        (apply *)))
 
-(solve input)
+(defn solve-part-1 [input]
+  (solve input get-pair))
+
+(defn solve-part-2 [input]
+  (solve input get-triplet))
